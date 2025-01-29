@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Candidate Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .chart-container {
+            width: 80%;
+            background-color: #fff;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        .description {
+            width: 80%;
+            background-color: #fff;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Candidate Dashboard</h1>
+    <div class="chart-container">
+        <canvas id="combinedChart"></canvas>
+    </div>
+    <div class="description">
+        <p><strong>Average Age:</strong> The bar representing the average age of candidates is highlighted in <span style="color: rgba(54, 162, 235, 1)">blue</span>. The calculation shows that the average age is <strong>30 years</strong>.</p>
+        <p><strong>Average Experience:</strong> In the graph, the bar for the average number of years of experience is colored in <span style="color: rgba(75, 192, 192, 1)">teal</span>. Candidates on average have <strong>5.2 years</strong> of professional experience.</p>
+        <p><strong>Average GPA:</strong> The bar for the average GPA is depicted in <span style="color: rgba(255, 206, 86, 1)">yellow</span>. The average GPA across all candidates stands at <strong>3.62</strong>.</p>
+    </div>
+
+    <script>
+        // Sample data
+        const data = {
+            ages: [25, 30, 35, 28, 32],
+            experiences: [3, 5, 8, 4, 6],
+            gpa: [3.5, 3.8, 3.2, 3.9, 3.7]
+        };
+
+        // Calculate averages
+        const average = arr => arr.reduce((a, b) => a + b, 0) / arr.length;
+
+        const ageAvg = average(data.ages);
+        const expAvg = average(data.experiences);
+        const gpaAvg = average(data.gpa);
+
+        // Combined Chart with interactivity
+        new Chart(document.getElementById('combinedChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Average Age', 'Average Experience', 'Average GPA'],
+                datasets: [{
+                    label: 'Averages',
+                    data: [ageAvg, expAvg, gpaAvg],
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(255, 206, 86, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(255, 206, 86, 1)'
+                    ],
+                    borderWidth: 1,
+                    barThickness: 40  // Adjust bar thickness
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1
+                        },
+                        grid: {
+                            display: false  // Remove grid lines on Y-axis
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false  // Remove grid lines on X-axis
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        enabled: true,
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': ' + context.raw.toFixed(2);
+                            }
+                        }
+                    }
+                },
+                hover: {
+                    mode: 'index',
+                    intersect: false
+                }
+            }
+        });
+    </script>
+</body>
+</html>

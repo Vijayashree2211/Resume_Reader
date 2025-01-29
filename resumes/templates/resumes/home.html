@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Reader - Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        h1 {
+            color: #333;
+        }
+        .upload-btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .upload-btn:hover {
+            background-color: #0056b3;
+        }
+        .features {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .features h2 {
+            color: #333;
+        }
+        .features ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .features ul li {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Resume Reader</h1>
+    <a href="{% url 'upload' %}" class="upload-btn">Upload Resume</a>
+
+    <div class="features">
+        <h2>Features</h2>
+        <ul>
+            <li>Easy Resume Upload</li>
+            <li>Resume Parsing</li>
+            <li>Interactive Dashboard</li>
+            <li>Download Parsed Data</li>
+        </ul>
+    </div>
+
+    <script>
+        // Example of adding a simple interactive element
+        document.querySelector('.upload-btn').addEventListener('click', function() {
+            alert('Please ensure your resume is in PDF or DOC format before uploading.');
+        });
+    </script>
+</body>
+</html>
